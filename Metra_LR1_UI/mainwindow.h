@@ -8,7 +8,8 @@
 #include <QtMath>
 #include <QTextStream>
 #include <QTableWidget>
-#include <QMap>
+#include <unordered_map>
+#include <string>
 #include <QFont>
 
 

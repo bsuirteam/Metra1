@@ -12,7 +12,8 @@ MainWindow::MainWindow(QWidget *parent)
     QFont fontTable("Verdana", 12);
     QFont fontCode("Courier New", 10);
 
-    this->setWindowTitle("Holsted Metrics");
+    this->setWindowTitle("Holsted Measures");
+    this->setWindowIcon(QIcon("..\\..\\..\\images\\icon.ico"));
     this->setFixedSize(1540, 750);
 
     ui->labelDict->setFont(fontText);
@@ -37,13 +38,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->textLength->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     ui->textVolume->setReadOnly(true);
-    ui->textVolume->setText("\nV = " + ((_n_1 + _n_2 != 0) ? QString::number((_N_1 + _N_2) * log2(_n_1 + _n_2)) : "0"));
+    ui->textVolume->setText("\nV = " + ((_n_1 + _n_2 != 0) ? QString::number((int) ( (_N_1 + _N_2) * log2(_n_1 + _n_2) ) ) : "0"));
     ui->textVolume->setFont(fontText);
     ui->textVolume->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     ui->tableOperators->setColumnCount(3);
     ui->tableOperators->setHorizontalHeaderLabels({"j", "Operator", "f_1j"});
-    ui->tableOperators->horizontalHeader()->setStretchLastSection(true);
+    ui->tableOperators->horizontalHeader()->setStretchLastSection(false);
     ui->tableOperators->verticalHeader()->setVisible(false);
     ui->tableOperators->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableOperators->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -52,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->tableOperands->setColumnCount(3);
     ui->tableOperands->setHorizontalHeaderLabels( {"i", "Operand", "f_2i"});
-    ui->tableOperands->horizontalHeader()->setStretchLastSection(true);
+    ui->tableOperands->horizontalHeader()->setStretchLastSection(false);
     ui->tableOperands->verticalHeader()->setVisible(false);
     ui->tableOperands->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableOperands->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -107,7 +108,7 @@ void MainWindow::SetHolsted()
 
     ui->textDict->setText("\nn = " + QString::number(_n_1 + _n_2));
     ui->textLength->setText("\nN = " + QString::number(_N_1 + _N_2));
-    ui->textVolume->setText("\nV = " + ((_n_1 + _n_2 != 0) ? QString::number((_N_1 + _N_2) * log2(_n_1 + _n_2)) : "0"));
+    ui->textVolume->setText("\nV = " + ((_n_1 + _n_2 != 0) ? QString::number((int) ( (_N_1 + _N_2) * log2(_n_1 + _n_2) ) ) : "0"));
 }
 
 void MainWindow::SetTableOperators(const QMap<QString, int> &operators)
@@ -253,12 +254,12 @@ void MainWindow::SaveTable(QTableWidget *table, const QString &filePath)
 
     file.close();
 
-    QMessageBox::information(this, "Saved", "Table Saved To File:\n" + filePath);
+    QMessageBox::information(this, "Saved", "Table Saved To File:");
 }
 
 void MainWindow::OpenFileSlot()
 {
-    QString initDir = "E:\\Metra\\PZ1\\Metra1\\analyz";
+    QString initDir = "..\\..\\..\\analyz";
     QStringList filters;
     filters << "Scala (*.scala *.sc)"
             << "All files (*.*)";
@@ -288,8 +289,8 @@ void MainWindow::RefreshSlot()
 
 void MainWindow::SaveTablesSlot()
 {
-    this->SaveTable(ui->tableOperators, "E:\\Metra\\PZ1\\Metra1\\res\\operators.txt");
-    this->SaveTable(ui->tableOperands, "E:\\Metra\\PZ1\\Metra1\\res\\operands.txt");
+    this->SaveTable(ui->tableOperators, "..\\..\\..\\res\\operators.txt");
+    this->SaveTable(ui->tableOperands, "..\\..\\..\\res\\operands.txt");
 }
 
 
